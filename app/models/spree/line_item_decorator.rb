@@ -52,6 +52,14 @@ module Spree::LineItemDecorator
       hash[ap.part] = ap.count * quantity
     end
   end
+
+  def verify_order_inventory_before_destroy
+    if product.assembly?
+      Spree::OrderInventoryAssembly.new(self).verify(target_shipment)
+    else
+      Spree::OrderInventory.new(order, self).verify(target_shipment)
+    end
+  end
 end
 
 Spree::LineItem.prepend Spree::LineItemDecorator
