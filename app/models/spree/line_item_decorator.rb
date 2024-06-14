@@ -17,7 +17,7 @@ module Spree::LineItemDecorator
   end
 
   def quantity_by_variant
-    if product.assembly?
+    if variant.parts.exists?
       if part_line_items.any?
         quantity_with_part_line_items(quantity)
       else
