@@ -77,4 +77,4 @@ module Spree::OrderContentsDecorator
   end
 end
 
-Spree::OrderContents.prepend Spree::OrderContentsDecorator if Spree.version.to_f < 3.7
+::Spree::OrderContents.prepend Spree::OrderContentsDecorator
