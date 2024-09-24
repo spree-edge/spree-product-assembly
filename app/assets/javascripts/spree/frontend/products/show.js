@@ -1,4 +1,4 @@
-Spree.ready(function(){
+document.addEventListener("spree:load", function() {
   if ($('.assemblies_variant').length) {
     $('.assemblies_variant').first().show();
 

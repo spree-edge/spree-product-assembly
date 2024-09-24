@@ -1,6 +1,6 @@
 //= require ./translations
 
-(function() {
+document.addEventListener("spree:load", function() {
   $(document).ready(function() {
     var makePostRequest, partsTable, searchForParts, searchResults, showErrorMessages;
     Spree.routes.available_admin_product_parts = function(productSlug) {
