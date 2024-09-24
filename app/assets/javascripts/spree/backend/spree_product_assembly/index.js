@@ -1,7 +1,7 @@
 //= require ./translations
 
 (function() {
-  $(document).ready(function() {
+  document.addEventListener("turbo:load", function() {
     var makePostRequest, partsTable, searchForParts, searchResults, showErrorMessages;
     Spree.routes.available_admin_product_parts = function(productSlug) {
       return Spree.pathFor("admin/products/" + productSlug + "/parts/available");
