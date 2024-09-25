@@ -20,7 +20,7 @@ module Spree::ProductDecorator
   end
 
   def assembly?
-    parts && assemblies_parts.exists?
+    parts.exists? && assemblies_parts.exists?
   end
 
   def count_of(variant)
