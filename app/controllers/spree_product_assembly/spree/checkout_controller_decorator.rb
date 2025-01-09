@@ -1,5 +1,5 @@
-module Spree
-  if defined? Spree::Frontend
+module SpreeProductAssembly
+  module Spree
     module CheckoutControllerDecorator
       # Override because we don't want to remove unshippable items from the order
       # A bundle itself is an unshippable item
@@ -9,9 +9,9 @@ module Spree
       def before_payment
         if @order.checkout_steps.include? 'delivery'
           packages = @order.shipments.map(&:to_package)
-          @differentiator = Spree::Stock::Differentiator.new(@order, packages)
+          @differentiator = ::Spree::Stock::Differentiator.new(@order, packages)
           @differentiator.missing.reject { |variant| variant.try(:parts).try(:any?) }.each do |variant, quantity|
-            Spree::Dependencies.cart_remove_item_service.constantize.call(order: @order, variant: variant, quantity: quantity)
+            ::Spree::Dependencies.cart_remove_item_service.constantize.call(order: @order, variant: variant, quantity: quantity)
           end
         end
 
@@ -21,5 +21,4 @@ module Spree
   end
 end
 
-Spree::CheckoutController.prepend Spree::CheckoutControllerDecorator
-
+Spree::CheckoutController.prepend SpreeProductAssembly::Spree::CheckoutControllerDecorator

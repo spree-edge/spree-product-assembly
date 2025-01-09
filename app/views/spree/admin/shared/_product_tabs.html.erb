@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= page_header_back_button spree.admin_products_path %>
+  <%= @product.name %>
+<% end %>
+
+<% content_for :page_tabs do %>
+  <%= render partial: 'spree/admin/shared/tabs', locals: { tabs: product_tabs, object: @product, current: current } %>
+  <%= link_to_with_icon 'th',
+    Spree.t(:parts),
+    admin_product_parts_url(@product),
+    class: "nav-link #{'active' if current == 'Parts'}" %>
+<% end %>
+
