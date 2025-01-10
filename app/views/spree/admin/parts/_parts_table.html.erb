@@ -8,7 +8,6 @@
       <th><%= Spree.t(:variant) %></th>
       <th><%= Spree.t(:qty) %></th>
       <th class="actions"></th>
-      <th>Stock</th>
     </tr>
   </thead>
   <tbody>
@@ -40,15 +39,11 @@
         <td class="actions">
           <%= image_tag "spinner.gif", :style => "display:none", :class => "spinner" %>
           <%= link_to_with_icon("edit", Spree.t("edit"),
-                      set_count_admin_product_part_url(product, id: part.assembly.id, part_id: part.part_id),
+                      set_count_admin_product_part_url(product, id: part.assembly_id, part_id: part.part_id),
                       :class => "set_count_admin_product_part_link btn btn-primary btn-sm", :no_text => true) %>
 
-          <%= link_to_with_icon("delete", Spree.t("delete"),
-                      remove_admin_product_part_url(product, id: part.assembly.id, part_id: part.part_id),
-                      :class => "remove_admin_product_part_link btn btn-danger btn-sm delete-resource", :no_text => true) %>
-        </td>
-        <td>
-          <%= part.part.stock_items.where(state: "available").sum(:count_on_hand) %>
+          <%= link_to_with_icon('delete', Spree.t("delete"), remove_admin_product_part_url(product, id: part.assembly.id, part_id: part.part_id), method: :post , class: 'remove_admin_product_part_link btn btn-danger btn-sm', data: { action: :remove, confirm: Spree.t(:are_you_sure) }, no_text: true) %>
+
         </td>
       </tr>
     <% end %>
